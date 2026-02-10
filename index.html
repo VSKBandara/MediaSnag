@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' expr:dir='blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='utf-8'/>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <title>Blogs & Tools</title>
+  <b:include data='blog' name='all-head-content'/>
+  
+  <!-- BOOTSTRAP CDN -->
+  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css' rel='stylesheet'/>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet'/>
+  
+  <!-- MINIMAL CUSTOM CSS -->
+  <style>
+    :root {
+      --fb: #1877F2; --yt: #FF0000; --tt: #000000; --any: #4CAF50;
+      --any-alt: #8BC34A; --shadow: 0 4px 15px rgba(0,0,0,0.1);
+      --light-purple: #f5f0ff;
+      --purple-border: #d9c2ff;
+    }
+    body { 
+      background-color: #f8f9fa; 
+      color: #333; 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      padding-top: 70px; 
+    }
+    .navbar { 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08); 
+      background: linear-gradient(120deg, #4a1bb5 0%, #2c0a73 100%) !important;
+      transition: all 0.3s ease;
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-brand i {
+      margin-right: 8px;
+      font-size: 1.6rem;
+      transition: color 0.3s ease;
+    }
+    .navbar-brand i:hover {
+      color: #FFD700 !important;
+    }
+    .nav-link {
+      font-weight: 500;
+      position: relative;
+      margin: 0 5px;
+      padding: 8px 10px !important;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      color: rgba(255,255,255,0.85) !important;
+    }
+    .nav-link:hover, 
+    .nav-link:focus {
+      color: white !important;
+      background: rgba(255,255,255,0.15) !important;
+      transform: translateY(-1px);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    .nav-link:hover::after {
+      width: 70%;
+    }
+    .nav-link.active {
+      color: white !important;
+      background: rgba(255,255,255,0.2) !important;
+    }
+    .tools-section { 
+      background: lightblue; 
+      border-radius: 16px; 
+      box-shadow: var(--shadow); 
+      padding: 25px; 
+      margin: 30px 0; 
+    }
+    .tool-tab { 
+      font-weight: 600; 
+      padding: 10px 15px; 
+      border-radius: 8px 8px 0 0; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      transition: all 0.3s; 
+      color: white !important;
+    }
+    .tool-tab.active { 
+      background: white; 
+      color: black !important; 
+      box-shadow: 0 -3px 0 var(--current); 
+    }
+    .tool-panel { 
+      display: none; 
+      padding-top: 20px; 
+    }
+    .tool-panel.active { 
+      display: block; 
+    }
+    .tool-btn {
+      color: white !important;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    .tool-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .fb-btn { background-color: var(--fb) !important; border-color: var(--fb) !important; }
+    .yt-btn { background-color: var(--yt) !important; border-color: var(--yt) !important; }
+    .tt-btn { 
+      background-color: var(--tt) !important; 
+      border-color: var(--tt) !important; 
+      color: white !important;
+    }
+    .any-btn { background-color: var(--any) !important; border-color: var(--any) !important; }
+    .any-btn.alt { 
+      background-color: var(--any-alt) !important; 
+      border-color: var(--any-alt) !important; 
+      margin-left: 10px; 
+    }
+    .disclaimer { 
+      font-size: 0.85rem; 
+      color: #6c757d; 
+      margin-top: 15px; 
+      padding-top: 12px; 
+      border-top: 1px dashed #dee2e6; 
+      line-height: 1.5; 
+    }
+    .cartoon-item { 
+      background: var(--light-purple); 
+      border: 1px solid var(--purple-border);
+      border-radius: 12px; 
+      overflow: hidden; 
+      box-shadow: var(--shadow); 
+      margin-bottom: 25px; 
+      transition: transform 0.3s, box-shadow 0.3s; 
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .cartoon-item:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    .thumbnail-container { 
+      position: relative; 
+      padding-top: 56.25%; 
+      cursor: pointer; 
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      border-radius: 12px 12px 0 0;
+    }
+    .thumbnail { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover;
+      transition: opacity 0.3s;
+    }
+    .cartoon-item:hover .thumbnail {
+      opacity: 0.9;
+    }
+    .play-overlay { 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      background: rgba(0,0,0,0.25); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      color: white; 
+      font-size: 2.5rem; 
+      opacity: 0; 
+      transition: opacity 0.3s; 
+      border-radius: 12px 12px 0 0;
+    }
+    .cartoon-item:hover .play-overlay { 
+      opacity: 1; 
+    }
+    .cartoon-title { 
+      padding: 15px; 
+      font-weight: 600; 
+      min-height: 50px; 
+      color: #2c0a73;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .category-card { 
+      border-radius: 16px; 
+      padding: 30px; 
+      color: white; 
+      text-align: center; 
+      box-shadow: var(--shadow); 
+      transition: all 0.4s ease; 
+      position: relative; 
+      overflow: hidden; 
+      height: 100%;
+      border: 2px solid rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+    }
+    .category-card:hover { 
+      transform: translateY(-5px) scale(1.02); 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border-color: rgba(255,255,255,0.6);
+    }
+    .category-card::before { 
+      content: ''; 
+      position: absolute; 
+      top: -50%; 
+      left: -50%; 
+      width: 200%; 
+      height: 200%; 
+      background: rgba(255,255,255,0.1); 
+      transform: rotate(30deg); 
+      transition: transform 0.7s ease; 
+    }
+    .category-card:hover::before { 
+      transform: rotate(30deg) translate(30%, 30%); 
+    }
+    .category-card.education { background: linear-gradient(135deg, #11998e, #38ef7d); }
+    .category-card.income { background: linear-gradient(135deg, #ff512f, #f09819); }
+    .category-card.stories { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+    .category-icon { 
+      font-size: 2.8rem; 
+      margin-bottom: 15px; 
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .post-card { 
+      background: white; 
+      border-radius: 16px; 
+      box-shadow: var(--shadow); 
+      margin-bottom: 30px; 
+      overflow: hidden; 
+      transition: transform 0.3s; 
+      border: 1px solid #eee;
+    }
+    .post-card:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    .post-body { 
+      padding: 25px; 
+    }
+    .post-snippet {
+      color: #555;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+    .read-more-btn {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--any) !important;
+      font-weight: 500;
+      text-decoration: none !important;
+      transition: all 0.2s;
+    }
+    .read-more-btn:hover {
+      color: var(--any-alt) !important;
+      padding-left: 5px;
+    }
+    .label-badge { 
+      background: #e9ecef; 
+      color: #495057; 
+      font-size: 0.85rem; 
+      padding: 4px 12px; 
+      border-radius: 20px; 
+      margin: 3px; 
+      display: inline-block; 
+      border: 1px solid #ddd;
+    }
+    footer { 
+      background: linear-gradient(120deg, #1a1a2e 0%, #16213e 100%); 
+      color: #aaa; 
+      padding: 40px 0 20px; 
+      margin-top: 50px; 
+      border-top: 1px solid #333;
+    }
+    .footer-links a { 
+      color: #ddd; 
+      text-decoration: none; 
+      margin: 0 15px; 
+      transition: color 0.2s; 
+      font-weight: 500;
+      display: inline-block;
+      padding: 5px 0;
+    }
+    .footer-links a:hover { 
+      color: var(--any); 
+      text-decoration: underline;
+    }
+    .copyright { 
+      text-align: center; 
+      padding-top: 20px; 
+      border-top: 1px solid #333; 
+      font-size: 0.9rem; 
+      color: #bbb;
+    }
+    
+    /* Cookie Banner - Fixed Logic */
+    .cookie-banner { 
+      position: fixed; 
+      bottom: 20px; 
+      left: 20px; 
+      right: 20px; 
+      background: linear-gradient(120deg, #2c0a73 0%, #4a1bb5 100%); 
+      color: white; 
+      padding: 18px 25px; 
+      border-radius: 14px;
+      box-shadow: 0 -5px 25px rgba(0,0,0,0.35); 
+      z-index: 9999; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      flex-wrap: wrap; 
+      gap: 15px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      max-width: 900px;
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .cookie-banner.show { 
+      transform: translateY(0); 
+      opacity: 1; 
+    }
+    .banner-content { 
+      display: flex; 
+      align-items: center; 
+      gap: 15px; 
+      flex: 1; 
+      min-width: 300px; 
+    }
+    .banner-content p { 
+      margin: 0; 
+      font-size: 0.95rem; 
+      line-height: 1.5; 
+      max-width: 600px;
+    }
+    .banner-content a { 
+      color: #4CAF50; 
+      text-decoration: underline; 
+      font-weight: 500; 
+      transition: all 0.2s;
+    }
+    .banner-content a:hover {
+      color: #8BC34A;
+    }
+    .banner-buttons { 
+      display: flex; 
+      gap: 12px; 
+      flex-wrap: wrap; 
+      min-width: 250px;
+      justify-content: flex-end;
+    }
+    #accept-cookies { 
+      background: #4CAF50 !important; 
+      border-color: #4CAF50 !important; 
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    #accept-cookies:hover {
+      background: #45a049 !important;
+      transform: scale(1.05);
+    }
+    #reject-cookies { 
+      background: #e53935 !important; 
+      border-color: #e53935 !important; 
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    #reject-cookies:hover {
+      background: #d32f2f !important;
+      transform: scale(1.05);
+    }
+    .banner-learn { 
+      background: transparent !important; 
+      border: 1px solid rgba(255,255,255,0.5) !important; 
+      color: white !important; 
+      padding: 8px 18px;
+      border-radius: 50px;
+      transition: all 0.2s;
+    }
+    .banner-learn:hover {
+      background: rgba(255,255,255,0.15) !important;
+      border-color: white !important;
+    }
+    
+    @media (max-width: 768px) {
+      .banner-content { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 12px;
+      }
+      .banner-buttons { 
+        width: 100%; 
+        justify-content: center; 
+        flex-wrap: wrap;
+      }
+      .tools-tabs { 
+        flex-direction: column; 
+      }
+      .tool-tab { 
+        width: 100%; 
+        margin-bottom: 5px; 
+      }
+      .any-btn.alt { 
+        margin-left: 0; 
+        margin-top: 10px; 
+        width: 100%; 
+      }
+      .navbar-nav {
+        margin-top: 15px;
+      }
+      .category-card {
+        margin-bottom: 15px;
+      }
+    }
+    
+    /* Blog post snippet enhancement */
+    .post-snippet::before {
+      content: "❝";
+      font-size: 1.8rem;
+      color: var(--any);
+      opacity: 0.3;
+      position: absolute;
+      margin-left: -15px;
+    }
+    .post-snippet::after {
+      content: "❞";
+      font-size: 1.8rem;
+      color: var(--any);
+      opacity: 0.3;
+      position: absolute;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class='navbar navbar-expand-lg navbar-dark fixed-top'>
+    <div class='container'>
+      <a class='navbar-brand' href=#>
+        <i class='fas fa-cloud-moon'></i>
+        <span>MediaSnag</span>
+      </a>
+      <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav'>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+      <div class='collapse navbar-collapse' id='navbarNav'>
+        <ul class='navbar-nav ms-auto'>
+          <li class='nav-item'><a class='nav-link active' href=#>Home</a></li>
+          <li class='nav-item'><a class='nav-link' href='https://digital-afterlife-wd.blogspot.com/search/label/Learn%20in%20English?&max-results=5'>Education</a></li>
+          <li class='nav-item'><a class='nav-link' href='https://digital-afterlife-wd.blogspot.com/search/label/Learn%20in%20Sinhala?&max-results=5'>Income</a></li>
+          <li class='nav-item'><a class='nav-link' href='https://midnight-fiction-wd.blogspot.com/search/label/Series?&max-results=5'>Stories</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class='container py-4'>
+    <!-- Homepage-only sections -->
+    <b:if cond='view.isHomepage'>
+      <!-- Categories Grid (NOW FIRST) -->
+      <section class='mb-5'>
+        <h2 class='text-center mb-4' style='color: #2c0a73; font-weight: 700;'>
+          <i class='fas fa-book-open me-2'></i>Explore Our World
+        </h2>
+        <div class='row g-4'>
+          <div class='col-md-4'>
+            <a href='https://digital-afterlife-wd.blogspot.com/search/label/Learn%20in%20English?&max-results=5' class='category-card education text-decoration-none d-block h-100' target='_blank'>
+              <div class='category-icon'><i class='fas fa-graduation-cap'></i></div>
+              <h3 class='h4 mb-2'>Education Hub</h3>
+              <p>Learning resources & tutorials to grow your skills</p>
+            </a>
+          </div>
+          <div class='col-md-4'>
+            <a href='https://www.youtube.com/watch?v=Fn9skiJXeFs&list=PLGUnvI_n_fU3Ze0Rt7p9Bg1HLZ3QEKH9S' class='category-card income text-decoration-none d-block h-100' target='_blank'>
+              <div class='category-icon'><i class='fas fa-wallet'></i></div>
+              <h3 class='h4 mb-2'>Income Streams</h3>
+              <p>Proven methods to build passive income online</p>
+            </a>
+          </div>
+          <div class='col-md-4'>
+            <a href='https://midnight-fiction-wd.blogspot.com/' class='category-card stories text-decoration-none d-block h-100' target='_blank'>
+              <div class='category-icon'><i class='fas fa-magic'></i></div>
+              <h3 class='h4 mb-2'>Story Garden</h3>
+              <p>Magical tales and adventures for all ages</p>
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Tools Section (NOW SECOND) -->
+      <section class='tools-section mb-5'>
+        <h2 class='text-center mb-4' style='color: #2c0a73; font-weight: 700;'>
+          <i class='fas fa-download me-2'></i>Universal Video Downloader
+        </h2>
+        <div class='tools-container'>
+          <!-- Tabs -->
+          <ul class='nav nav-tabs mb-4' id='toolTabs'>
+            <li class='nav-item'><a class='nav-link tool-tab active fb-tab' data-bs-toggle='tab' href='#fbPanel' style='--current:var(--fb); background: var(--fb);'><i class='fab fa-facebook-f me-1'></i> Facebook</a></li>
+            <li class='nav-item'><a class='nav-link tool-tab yt-tab' data-bs-toggle='tab' href='#ytPanel' style='--current:var(--yt); background: var(--yt);'><i class='fab fa-youtube me-1'></i> YouTube</a></li>
+            <li class='nav-item'><a class='nav-link tool-tab tt-tab' data-bs-toggle='tab' href='#ttPanel' style='--current:var(--tt); background: var(--tt);'><i class='fab fa-tiktok me-1'></i> TikTok/IG</a></li>
+            <li class='nav-item'><a class='nav-link tool-tab any-tab' data-bs-toggle='tab' href='#anyPanel' style='--current:var(--any); background: var(--any);'><i class='fas fa-globe me-1'></i> Any Site</a></li>
+          </ul>
+          
+          <!-- Tab Content -->
+          <div class='tab-content'>
+            <!-- Facebook -->
+            <div class='tab-pane fade show active' id='fbPanel'>
+              <input type='url' class='form-control mb-3' placeholder='Paste Facebook Reels/Video URL (Public)' id='fb-url'/>
+              <button class='btn tool-btn fb-btn w-100' data-base='https://fdownloader.net/?url='>
+                <i class='fas fa-download me-2'></i>Download via FDownloader
+              </button>
+              <p class='disclaimer mt-3'>⚠️ Works for PUBLIC Facebook content only. We redirect to FDownloader.net. Ensure you have rights to download. <a href='terms.html' style='color: #e53935;'>Terms apply</a>.</p>
+            </div>
+            
+            <!-- YouTube -->
+            <div class='tab-pane fade' id='ytPanel'>
+              <input type='url' class='form-control mb-3' placeholder='Paste YouTube Video URL' id='yt-url'/>
+              <button class='btn tool-btn yt-btn w-100' data-base='https://en1.savefrom.net/1-youtube-video-downloader-13sg/?url='>
+                <i class='fas fa-download me-2'></i>Download via SaveFrom
+              </button>
+              <p class='disclaimer mt-3'>⚠️ Redirects to SaveFrom.net. For personal use only. Respect copyright. <a href='terms.html' style='color: #e53935;'>Terms apply</a>.</p>
+            </div>
+            
+            <!-- TikTok/Instagram -->
+            <div class='tab-pane fade' id='ttPanel'>
+              <input type='url' class='form-control mb-3' placeholder='Paste TikTok or Instagram URL' id='tt-url'/>
+              <button class='btn tool-btn tt-btn w-100' data-base='https://en1.savefrom.net/16xF/?url='>
+                <i class='fas fa-download me-2'></i>Download via SaveFrom
+              </button>
+              <p class='disclaimer mt-3'>⚠️ Works for PUBLIC TikTok/Instagram content. Redirects to SaveFrom.net. <a href='terms.html' style='color: #e53935;'>Terms apply</a>.</p>
+            </div>
+            
+            <!-- Any Site -->
+            <div class='tab-pane fade' id='anyPanel'>
+              <input type='url' class='form-control mb-3' placeholder='Paste any video URL (e.g., Twitter, Dailymotion)' id='any-url'/>
+              <div class='d-flex flex-wrap gap-2 mt-2'>
+                <button class='btn tool-btn any-btn flex-grow-1' data-base='https://9xbuddy.site/?url='>
+                  <i class='fas fa-download me-1'></i>9xBuddy
+                </button>
+                <button class='btn tool-btn any-btn alt flex-grow-1' data-base='https://www.savethevideo.com/?url='>
+                  <i class='fas fa-download me-1'></i>SaveTheVideo
+                </button>
+              </div>
+              <p class='disclaimer mt-3'>⚠️ Two fallback options. Works best with PUBLIC videos. We do not host content. <a href='terms.html' style='color: #e53935;'>Terms apply</a>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Cartoon Dashboard (NOW THIRD) -->
+      <section class='mb-5'>
+        <h2 class='text-center mb-4' style='color: #2c0a73; font-weight: 700;'>
+          <i class='fas fa-tv me-2'></i>My Cartoon Collection
+        </h2>
+        <div class='row' id='cartoonGrid' data-youtube-ids='yPtMV7AS9Tw,N3CjSfY_1Qo,Co7zZ8uR6FM,uyV2RF7UqYI,Rtcs7r-KBxk,Fs2H39vGBzk'>
+          <div class='col-12 text-center py-5'>
+            <div class='spinner-border text-purple' role='status' style='width: 3rem; height: 3rem; border-width: 4px;'>
+              <span class='visually-hidden'>Loading cartoons...</span>
+            </div>
+            <p class='mt-3 text-muted'>Bringing magical stories to your screen...</p>
+          </div>
+        </div>
+      </section>
+    </b:if>
+    
+    <!-- Blog Posts Section -->
+    <section class='blog-posts'>
+      <b:if cond='!view.isHomepage'>
+        <h2 class='text-center mb-4 pb-3' style='color: #2c0a73; border-bottom: 2px solid var(--purple-border); padding-bottom: 15px;'>
+          <i class='fas fa-newspaper me-2'></i>Latest Articles
+        </h2>
+      </b:if>
+      <b:loop values='posts' var='post'>
+        <article class='post-card'>
+          <div class='post-body'>
+            <h2 class='h3 mb-3'>
+			<a href='https://www.youtube.com/watch?v=sz2RUx5waDw' class='text-decoration-none text-dark' target='_blank'>
+                The Art of Balance: Top 6 tips for Enjoy Work and Life 
+              </a>
+            </h2>
+            <b:if cond='post.snippet'>
+              <p class='post-snippet mb-3'>
+                Get ready to transform your daily routine with simple and powerful tips to master the art of work–life balance. 
+              </p>
+              <a href='https://www.youtube.com/watch?v=ly0jARqI5L0&list=PLGUnvI_n_fU3I9oaICXahT0_ySq-evGqV' class='read-more-btn' target='_blank'>
+                <i class='fas fa-book-open me-1'></i>Watch Education Videos
+              </a>
+            <b:else/></br>
+              <div class='mb-3'>Contents created by White Devil. Animations That Teach & Entertain.</div>
+            </b:if>
+            <b:if cond='post.labels'>
+              <div class='d-flex flex-wrap mt-3 pt-2 border-top'>
+                <b:loop values='post.labels' var='label'>
+                  <span class='label-badge'>Tech Animation</span> <span class='label-badge'>Education</span> <span class='label-badge'>Insights & Fun</span>
+                </b:loop>
+              </div>
+            </b:if>
+          </div>
+        </article>
+      </b:loop>
+    </section>
+    
+    <!-- Purpose Explanation Section (Only on Homepage) -->
+    <b:if cond='view.isHomepage'>
+      <section class='mb-5 mt-4 p-4' style='background: var(--light-purple); border-radius: 16px; border: 1px solid var(--purple-border);'>
+        <h3 class='text-center mb-4' style='color: #2c0a73;'><i class='fas fa-lightbulb me-2'></i>How This Works</h3>
+        <div class='row text-center'>
+          <div class='col-md-4 mb-4'>
+            <div class='p-3'>
+              <div class='bg-white d-inline-block p-3 rounded-circle mb-3' style='box-shadow: var(--shadow);'>
+                <i class='fas fa-search fa-2x' style='color: var(--any);'></i>
+              </div>
+              <h5>Find Content</h5>
+              <p class='text-muted'>Browse our categories or use the search function to discover videos and articles</p>
+            </div>
+          </div>
+          <div class='col-md-4 mb-4'>
+            <div class='p-3'>
+              <div class='bg-white d-inline-block p-3 rounded-circle mb-3' style='box-shadow: var(--shadow);'>
+                <i class='fas fa-download fa-2x' style='color: var(--fb);'></i>
+              </div>
+              <h5>Download Videos</h5>
+              <p class='text-muted'>Use our safe tools to download public videos from social platforms for offline viewing</p>
+            </div>
+          </div>
+          <div class='col-md-4 mb-4'>
+            <div class='p-3'>
+              <div class='bg-white d-inline-block p-3 rounded-circle mb-3' style='box-shadow: var(--shadow);'>
+                <i class='fas fa-book fa-2x' style='color: var(--yt);'></i>
+              </div>
+              <h5>Enjoy Stories</h5>
+              <p class='text-muted'>Read our articles or watch cartoons directly on the site - no downloads needed!</p>
+            </div>
+          </div>
+        </div>
+        <div class='alert alert-info mt-4 mb-0' style='background: rgba(76, 175, 80, 0.1); border-left: 4px solid var(--any);'>
+          <i class='fas fa-info-circle me-2'></i>
+          <strong>Note:</strong> The "Read More" links take you to full articles on this blog. If you see a blank page, it means that specific post hasn't been published yet. We're constantly adding new content!
+        </div>
+      </section>
+    </b:if>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class='container'>
+      <div class='text-center mb-4'>
+        <div class='footer-links'>
+          <a href='terms.html'><i class='fas fa-file-contract me-1'></i>Terms</a>
+          <a href='privacy.html'><i class='fas fa-shield-alt me-1'></i>Privacy</a>
+          <a href='disclaimer.html'><i class='fas fa-exclamation-triangle me-1'></i>Disclaimer</a>
+          <a href='contact.html'><i class='fas fa-envelope me-1'></i>Contact</a>
+        </div>
+      </div>
+      <div class='copyright'>
+        &copy; <script>document.write(new Date().getFullYear())</script> <blog.title/>. All rights reserved.<br/>
+        <span class='mt-2 d-block'>Tools redirect to trusted third-party services. Users are responsible for content usage per platform terms.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent Banner (FIXED LOGIC) -->
+  <div id='cookie-banner' class='cookie-banner'>
+    <div class='banner-content'>
+      <div class='d-flex align-items-center'>
+        <i class='fas fa-cookie-bite fa-2x me-3' style='color: #FFD700;'></i>
+        <p class='mb-0'>
+          We use essential cookies to ensure site functionality. By continuing, you agree to our 
+          <a href='privacy.html' class='fw-bold'>Privacy Policy</a>. 
+          <span class='d-block d-md-inline mt-1 mt-md-0 ms-md-1'>
+            <small>(No tracking cookies without consent)</small>
+          </span>
+        </p>
+      </div>
+      <div class='banner-buttons'>
+        <button id='accept-cookies' class='btn btn-sm'>
+          <i class='fas fa-check-circle me-1'></i>Accept Essential Cookies
+        </button>
+        <button id='reject-cookies' class='btn btn-sm'>
+          <i class='fas fa-times-circle me-1'></i>Reject Non-Essential
+        </button>
+        <a href='privacy.html' class='btn btn-sm banner-learn'>
+          <i class='fas fa-info-circle me-1'></i>Cookie Settings
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js'></script>
+  
+  <!-- Critical App Logic -->
+  <script>
+    // <![CDATA[
+    document.addEventListener('DOMContentLoaded', function() {
+      // Tool redirect logic
+      document.querySelectorAll('.tool-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const base = this.dataset.base;
+          const input = this.closest('.tab-pane').querySelector('input[type="url"]');
+          const urlVal = input.value.trim();
+          
+          if (!urlVal) {
+            alert('⚠️ Please enter a video URL');
+            input.focus();
+            return;
+          }
+          
+          try {
+            new URL(urlVal);
+            // Clean URL - remove spaces and validate
+            const cleanUrl = urlVal.replace(/\s+/g, '');
+            window.location.href = base + encodeURIComponent(cleanUrl);
+          } catch (e) {
+            alert('⚠️ Invalid URL format. Please check and try again.');
+            input.focus();
+          }
+        });
+      });
+      
+      // Cartoon dashboard (FIXED URL FORMATTING)
+      const cartoonGrid = document.getElementById('cartoonGrid');
+      if (cartoonGrid) {
+        const videoIds = cartoonGrid.dataset.youtubeIds.split(',');
+        cartoonGrid.innerHTML = ''; // Clear loader
+        
+        if (videoIds.length > 0) {
+          videoIds.forEach(id => {
+            // Sanitize ID
+            const cleanId = id.trim();
+            if (!cleanId) return;
+            
+            const col = document.createElement('div');
+            col.className = 'col-md-4 col-sm-6 mb-4';
+            
+            const item = document.createElement('div');
+            item.className = 'cartoon-item';
+            item.innerHTML = `
+              <div class="thumbnail-container">
+                <img src="https://img.youtube.com/vi/${cleanId}/hqdefault.jpg" alt="Cartoon thumbnail" class="thumbnail">
+                <div class="play-overlay"><i class="fas fa-play"></i></div>
+              </div>
+              <div class="cartoon-title">Loading story...</div>
+            `;
+            col.appendChild(item);
+            cartoonGrid.appendChild(col);
+            
+            // Fetch title with error handling
+            fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${cleanId}&format=json`)
+              .then(response => {
+                if (!response.ok) throw new Error('Video not found');
+                return response.json();
+              })
+              .then(data => {
+                item.querySelector('.cartoon-title').textContent = data.title || 'Cartoon Story';
+              })
+              .catch(() => {
+                item.querySelector('.cartoon-title').textContent = 'Magical Story';
+                // Fallback thumbnail on error
+                item.querySelector('.thumbnail').src = 'https://via.placeholder.com/320x180/f5f0ff/2c0a73?text=Cartoon+Story';
+              });
+            
+            // Click to embed (with proper cleanup)
+            item.addEventListener('click', function() {
+              // Create clean embed container
+              const embedContainer = document.createElement('div');
+              embedContainer.style.position = 'relative';
+              embedContainer.style.paddingTop = '56.25%';
+              embedContainer.style.borderRadius = '12px 12px 0 0';
+              embedContainer.style.overflow = 'hidden';
+              
+              const iframe = document.createElement('iframe');
+              iframe.src = `https://www.youtube.com/embed/${cleanId}?autoplay=1&rel=0`;
+              iframe.setAttribute('style', 'position:absolute;top:0;left:0;width:100%;height:100%;border:0;');
+              iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+              iframe.setAttribute('allowfullscreen', 'true');
+              
+              embedContainer.appendChild(iframe);
+              
+              // Replace thumbnail container
+              const thumbContainer = this.querySelector('.thumbnail-container');
+              thumbContainer.parentNode.replaceChild(embedContainer, thumbContainer);
+              
+              // Hide play overlay
+              const overlay = this.querySelector('.play-overlay');
+              if (overlay) overlay.style.display = 'none';
+            });
+          });
+        } else {
+          cartoonGrid.innerHTML = `<div class='col-12 text-center py-5'><div class='alert alert-warning'>No cartoons available at the moment. Check back soon!</div></div>`;
+        }
+      }
+      
+      // Cookie consent (ROBUST LOGIC)
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('accept-cookies');
+      const rejectBtn = document.getElementById('reject-cookies');
+      
+      // Check for existing consent cookie
+      const getCookie = (name) => {
+        return document.cookie.split(';').some(c => c.trim().startsWith(name + '='));
+      };
+      
+      const getCookieValue = (name) => {
+        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        return match ? match[2] : null;
+      };
+      
+      const setCookie = (name, value, days = 365) => {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/; SameSite=Strict${location.protocol === 'https:' ? '; Secure' : ''}`;
+      };
+      
+      const deleteCookie = (name) => {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+      };
+      
+      // Clean up old cookie formats
+      if (getCookie('cookie_consent')) {
+        deleteCookie('cookie_consent');
+      }
+      
+      // Check cookie logic with 24-hour reset for rejected/ignored users
+      const checkCookieBanner = () => {
+        const cookieValue = getCookieValue('cookie_consent_granted');
+        
+        if (!cookieValue) {
+          // No cookie - show banner
+          setTimeout(() => {
+            banner.classList.add('show');
+            if (window.innerWidth < 768) {
+              banner.style.bottom = '15px';
+              banner.style.left = '15px';
+              banner.style.right = '15px';
+            }
+          }, 1200);
+          return;
+        }
+        
+        // Parse cookie value and timestamp
+        const [status, timestamp] = cookieValue.split('|');
+        const cookieDate = timestamp ? new Date(parseInt(timestamp)) : null;
+        const now = new Date();
+        
+        if (status === 'essential') {
+          // Accepted users - show again after 7 days
+          if (cookieDate && (now - cookieDate) > (7 * 24 * 60 * 60 * 1000)) {
+            setTimeout(() => {
+              banner.classList.add('show');
+              if (window.innerWidth < 768) {
+                banner.style.bottom = '15px';
+                banner.style.left = '15px';
+                banner.style.right = '15px';
+              }
+            }, 1200);
+          }
+        } else {
+          // Rejected or ignored users - show again after 24 hours
+          if (!cookieDate || (now - cookieDate) > (24 * 60 * 60 * 1000)) {
+            setTimeout(() => {
+              banner.classList.add('show');
+              if (window.innerWidth < 768) {
+                banner.style.bottom = '15px';
+                banner.style.left = '15px';
+                banner.style.right = '15px';
+              }
+            }, 1200);
+          }
+        }
+      };
+      
+      // Run cookie check
+      checkCookieBanner();
+      
+      // Accept cookies
+      acceptBtn?.addEventListener('click', () => {
+        const now = new Date().getTime();
+        setCookie('cookie_consent_granted', `essential|${now}`, 365);
+        banner.classList.remove('show');
+        console.log('Essential cookies accepted');
+      });
+      
+      // Reject non-essential cookies
+      rejectBtn?.addEventListener('click', () => {
+        const now = new Date().getTime();
+        setCookie('cookie_consent_granted', `rejected|${now}`, 2); // Store for 2 days
+        banner.classList.remove('show');
+        console.log('Non-essential cookies rejected. Only essential functionality enabled.');
+      });
+      
+      // Auto-hide after 45 seconds if ignored (with consent recorded as "ignored")
+      setTimeout(() => {
+        if (banner.classList.contains('show')) {
+          const cookieValue = getCookieValue('cookie_consent_granted');
+          if (!cookieValue || !cookieValue.includes('ignored')) {
+            const now = new Date().getTime();
+            setCookie('cookie_consent_granted', `ignored|${now}`, 2); // Store for 2 days
+            banner.classList.remove('show');
+            console.log('Cookie consent ignored. Banner hidden for 24 hours.');
+          }
+        }
+      }, 45000);
+      
+      // Blog post snippet enhancement
+      document.querySelectorAll('.post-snippet').forEach(snippet => {
+        if (snippet.textContent.length > 150) {
+          snippet.innerHTML = snippet.textContent.substring(0, 150) + '...';
+        }
+      });
+    });
+    // ]]>
+  </script>
+</body>
+</html>
